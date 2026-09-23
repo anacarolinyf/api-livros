@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca de Livros</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-content">
+        <p class="eyebrow">CATÁLOGO DIGITAL</p>
+        <h1>Biblioteca de Livros</h1>
+        <p class="subtitle">Organize seu acervo em um só lugar.</p>
+      </div>
+    </header>
+
+    <main class="container page-content">
+      <section class="panel form-panel" aria-labelledby="form-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GERENCIAMENTO</p>
+            <h2 id="form-title">Cadastrar livro</h2>
+          </div>
+          <span id="form-mode" class="mode-label">Novo registro</span>
+        </div>
+
+        <form id="book-form">
+          <input id="book-id" type="hidden" />
+
+          <div class="form-grid">
+            <label for="title">
+              Título
+              <input id="title" name="titulo" type="text" required maxlength="150" />
+            </label>
+
+            <label for="author">
+              Autor
+              <input id="author" name="autor" type="text" required maxlength="120" />
+            </label>
+
+            <label for="publication-year">
+              Ano de publicação
+              <input
+                id="publication-year"
+                name="ano_publicacao"
+                type="number"
+                min="0"
+                max="2100"
+                required
+              />
+            </label>
+
+            <label class="checkbox-label" for="available">
+              <input id="available" name="disponivel" type="checkbox" checked />
+              Livro disponível
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button id="submit-button" class="button button-primary" type="submit">
+              Salvar livro
+            </button>
+            <button id="cancel-button" class="button button-secondary" type="button" hidden>
+              Cancelar edição
+            </button>
+          </div>
+        </form>
+
+        <p id="form-message" class="message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel list-panel" aria-labelledby="list-title">
+        <div class="section-heading list-heading">
+          <div>
+            <p class="eyebrow">ACERVO</p>
+            <h2 id="list-title">Livros cadastrados</h2>
+          </div>
+          <button id="refresh-button" class="button button-secondary" type="button">
+            Atualizar lista
+          </button>
+        </div>
+
+        <p id="list-message" class="message" role="status" aria-live="polite"></p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Ano</th>
+                <th>Status</th>
+                <th class="actions-column">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="books-table-body"></tbody>
+          </table>
+        </div>
+
+        <p id="empty-state" class="empty-state" hidden>
+          Nenhum livro foi cadastrado ainda.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

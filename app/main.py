@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import BaseBanco, mecanismo_banco, obter_sessao_banco
 from app.models import Livro
@@ -15,6 +16,16 @@ app = FastAPI(
     description="API didática para gerenciamento de livros.",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+    ],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Content-Type"],
+)
 
 @app.post("/livros", response_model=LivroResposta, status_code=201, tags=["Livros"])
 def criar_livro(dados_livro: LivroCriacao, sessao_banco: Session = Depends(obter_sessao_banco)):
@@ -93,3 +104,4 @@ def excluir_livro(
     sessao_banco.commit()
 
     return {"mensagem": "Livro excluído com sucesso"}
+
